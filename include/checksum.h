@@ -67,6 +67,7 @@ extern "C" {
 #define		CRC_START_16		0x0000
 #define		CRC_START_MODBUS	0xFFFF
 #define		CRC_START_XMODEM	0x0000
+#define		CRC_START_CCITT_0000	0x0000
 #define		CRC_START_CCITT_1D0F	0x1D0F
 #define		CRC_START_CCITT_FFFF	0xFFFF
 #define		CRC_START_KERMIT	0x0000
@@ -86,6 +87,7 @@ uint16_t		crc_16(             const unsigned char *input_str, size_t num_bytes  
 uint32_t		crc_32(             const unsigned char *input_str, size_t num_bytes       );
 uint64_t		crc_64_ecma(        const unsigned char *input_str, size_t num_bytes       );
 uint64_t		crc_64_we(          const unsigned char *input_str, size_t num_bytes       );
+uint16_t		crc_ccitt_0000(     const unsigned char *input_str, size_t num_bytes       );
 uint16_t		crc_ccitt_1d0f(     const unsigned char *input_str, size_t num_bytes       );
 uint16_t		crc_ccitt_ffff(     const unsigned char *input_str, size_t num_bytes       );
 uint16_t		crc_dnp(            const unsigned char *input_str, size_t num_bytes       );

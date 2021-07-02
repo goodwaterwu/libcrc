@@ -55,6 +55,20 @@ uint16_t crc_xmodem( const unsigned char *input_str, size_t num_bytes ) {
 }  /* crc_xmodem */
 
 /*
+ * uint16_t crc_ccitt_0000( const unsigned char *input_str, size_t num_bytes );
+ *
+ * The function crc_ccitt_0000() performs a one-pass calculation of the CCITT
+ * CRC for a byte string that has been passed as a parameter. The initial value
+ * 0x0000 is used for the CRC.
+ */
+
+uint16_t crc_ccitt_0000( const unsigned char *input_str, size_t num_bytes ) {
+
+	return crc_ccitt_generic( input_str, num_bytes, CRC_START_CCITT_0000 );
+
+}  /* crc_ccitt_0000 */
+
+/*
  * uint16_t crc_ccitt_1d0f( const unsigned char *input_str, size_t num_bytes );
  *
  * The function crc_ccitt_1d0f() performs a one-pass calculation of the CCITT

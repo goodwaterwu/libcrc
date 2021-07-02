@@ -96,8 +96,8 @@ TABDIR = tab/
 TSTDIR = test/
 EXADIR = examples/
 
-CC     ?= cc
-LINK   ?= $(CC)
+CC     = $(CROSS_COMPILE)gcc
+LINK   = cc
 RM     = /bin/rm -f
 STRIP  = strip
 OBJEXT = .o
@@ -108,11 +108,16 @@ XFLAG  = -o
 AR     = ar
 ARQC   = qc 
 ARQ    = q
-RANLIB = ranlib
+RANLIB = $(CROSS_COMPILE)ranlib
 CFLAGS = -Wall -Wextra -Wstrict-prototypes -Wshadow -Wpointer-arith \
 	-Wcast-qual -Wcast-align -Wwrite-strings -Wredundant-decls \
 	-Wnested-externs -Werror -O3 \
 	-funsigned-char -I${INCDIR}
+
+ifeq ($(CROSS_COMPILE),)
+tall = testall${EXEEXT}
+tcrc = tstcrc${EXEEXT}
+endif
 
 endif
 
@@ -127,7 +132,7 @@ ${TSTDIR}${OBJDIR}%${OBJEXT} : ${TSTDIR}%.c
 	${CC} -c ${CFLAGS} ${OFLAG}$@ $<
 
 ${GENDIR}${OBJDIR}%${OBJEXT} : ${GENDIR}%.c
-	${CC} -c ${CFLAGS} ${OFLAG}$@ $<
+	cc -c ${CFLAGS} ${OFLAG}$@ $<
 
 ${EXADIR}${OBJDIR}%${OBJEXT} : ${EXADIR}%.c
 	${CC} -c ${CFLAGS} ${OFLAG}$@ $<
@@ -140,8 +145,8 @@ ${EXADIR}${OBJDIR}%${OBJEXT} : ${EXADIR}%.c
 
 all:							\
 	${LIBDIR}libcrc${LIBEXT}			\
-	testall${EXEEXT}				\
-	tstcrc${EXEEXT}
+	${tall}				\
+	${tcrc}
 
 #
 # This target cleans up all files created in the compilation phase.

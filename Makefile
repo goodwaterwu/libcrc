@@ -163,6 +163,13 @@ clean:
 	${RM} testall${EXEEXT}
 	${RM} tstcrc${EXEEXT}
 
+install:
+	install -d $(DESTDIR)/usr/local/lib
+	install -m 755 ${LIBDIR}libcrc${LIBEXT} $(DESTDIR)/usr/local/lib
+
+uninstall:
+	@rm -rf $(DESTDIR)/usr/local/lib/libcrc${LIBEXT}
+
 #
 # The testall program can be run after compilation to verify the checksum
 # routines. The extension of the program depends on the operating system used.
